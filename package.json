@@ -4,7 +4,7 @@
   "description": "simple url shortener using nodejs, expressjs, mongodb",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
