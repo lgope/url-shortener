@@ -1,37 +1,21 @@
-const express = require('express');
 const mongoose = require('mongoose');
-const ShortUrl = require('./models/shortUrl');
+const dotenv = require('dotenv');
 
-const app = express();
+dotenv.config({ path: './config.env' });
+const app = require('./app');
 
-mongoose.connect('mongodb://localhost/urlShortener', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+const DB = process.env.DATABASE.replace(
+  '<PASSWORD>',
+  process.env.DATABASE_PASSWORD
+);
 
-app.set('view engine', 'ejs');
-app.use(express.urlencoded({ extended: false }));
-
-app.get('/', async (req, res) => {
-  const shortUrls = await ShortUrl.find();
-  res.render('index', { shortUrls: shortUrls });
-});
-
-app.post('/shortUrls', async (req, res) => {
-  await ShortUrl.create({ full: req.body.fullUrl });
-  res.redirect('/');
-});
-
-app.get('/:shortUrl', async (req, res) => {
-  const shortUrl = await ShortUrl.findOne({ short: req.params.shortUrl });
-
-  if (!shortUrl) return res.sendStatus(404);
-
-  shortUrl.clicks++;
-  shortUrl.save();
-
-  res.redirect(shortUrl.full);
-});
+mongoose
+  .connect(DB, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  })
+  .then(() => console.log('DB connection successful!'));
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
