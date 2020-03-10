@@ -3,8 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="author" content="Lakshman Gope">
+    <meta name="description" content="A simple url shortener. Using ejs, nodejs, expressjs, mongodb">
+    <meta name="keywords" content="JavaScript,ejs,nodejs,expressjs, mongodb">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- favicon -->
+    <link rel="icon"
+        href="https://4.bp.blogspot.com/-fcPYy_0QhRg/V3ZwjCoHUHI/AAAAAAAAA5c/8DzdhzhGjYwhTPI2TpYPRld2iidHbd7aACLcB/s1600/Evolution%2BCursor.png"
+        type="image/gif" sizes="16x16">
+
+    <!-- bootstrap cdn -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>URL Shortener</title>
@@ -31,8 +40,8 @@
             <tbody>
                 <% shortUrls.forEach(shortUrl => { %>
                 <tr>
-                    <td><a href="<%= shortUrl.full %>"><%= shortUrl.full %></a></td>
-                    <td><a href="<%= shortUrl.short %>"><%= shortUrl.short %></a></td>
+                    <td><a href="<%= shortUrl.full %>" target="blank"><%= shortUrl.full %></a></td>
+                    <td><a href="<%= shortUrl.short %>" target="blank"><%= shortUrl.short %></a></td>
                     <td><%= shortUrl.clicks %></td>
                 </tr>
                 <% }) %>
